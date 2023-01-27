@@ -1,0 +1,10 @@
+.footer{
+    padding: 20px;
+    height: 70px;
+    width: 100%;
+    background-color: var(--main-color);
+    color: #fff;
+    background: radial-gradient(circle, #fff 0%,  var(--main-color) 50%);
+    margin-top: 50px;
+}
+

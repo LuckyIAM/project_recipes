@@ -1,0 +1,10 @@
+.contain-main-mini-carousel{
+    width: 95%;
+    overflow: hidden;
+}
+.scrol-main-carusel{
+    margin: 30px ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

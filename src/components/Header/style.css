@@ -1,0 +1,61 @@
+.container-header{
+    position: sticky;
+    top: 0;
+    left: 0;
+    height: 120px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.menu-button{
+    padding: 0px 15px;
+    font-size: 25px;
+    text-decoration: none;
+    font-weight: 800;
+    color: var(--main-color);
+    
+}
+#search{
+    background: transparent;
+    border: none;
+}
+
+.user-login ,
+.user-logout{
+    color: var(--main-color);
+    font-size: 37px;
+    padding: 0px 5px;
+}
+.search-icon{
+    font-size: 25px;
+    padding: 4px;
+    transform: rotate(10deg);
+}
+.search-content{
+    padding: 2px 10px;
+    background-color: var(--main-color);
+    border-radius: 20px; 
+}
+.search-content .row-direction{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search-input{
+    height: 28px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    padding: 0px 10px;
+}
+.add-blog-icon, 
+.edit-blog-icon{
+    width: 25px;
+    height: 25px;
+    margin: 0 5px;
+}

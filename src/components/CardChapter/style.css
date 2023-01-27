@@ -1,0 +1,26 @@
+.contain-card-chapter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.name-card-chapter{
+    font-size: 25px;
+    font-weight: 800;
+    margin-bottom: 5px;
+    text-align: center;
+}
+.container-description-dishe-chapter{
+    position: absolute;
+    top: 25px;
+    left: 15px;
+    width: 100%;
+    
+}
+.image-card-chapter:hover .container-description-dishe-chapter{
+    position: relative;
+    transition: 0.5s transform linear, 0.5s top linear;
+    transform: scaleY(-25px);
+    top: 0px;
+    left: 15px;
+    width: 100%;
+}

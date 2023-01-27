@@ -1,0 +1,71 @@
+.follow-us{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.follow-us-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 90%;
+    padding: 20px;
+    gap: 10px;
+   
+}
+.block{
+    font-size: 30px;
+    padding: 15px 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: white;
+    
+}
+.follow-us-text{
+    font-size: 11px;
+    padding: 15px 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: white;
+}
+.follow-us-block1 .block {
+    background: #1877f2;
+}
+.follow-us-block1 .follow-us-text {
+    background: #1877f27e;
+}
+.follow-us-block2 .block {
+    background: #c13584;
+}
+.follow-us-block2 .follow-us-text {
+    background: #c135847e;
+}
+.follow-us-block3 .block {
+    background: #f70000;
+}
+.follow-us-block3 .follow-us-text {
+    background: #f700007e;
+}
+.follow-us-block4 .block {
+    background: #1da1f2;
+}
+.follow-us-block4 .follow-us-text {
+    background: #1da1f27e;
+}
+.follow-us-block5 .block {
+    background: #2ea0d5;
+}
+.follow-us-block5 .follow-us-text {
+    background: #2ea0d57e;
+}
+.follow-us-block6 .block {
+    background: #1bd741;
+}
+.follow-us-block6 .follow-us-text {
+    background: #1bd7417e;
+}
+
+

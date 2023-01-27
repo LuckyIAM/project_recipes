@@ -1,0 +1,26 @@
+.main-banner{
+    margin-top: 35px;
+    width: 100%;
+}
+.main-banner-img{
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-banner-title1,
+.main-banner-title2{
+    font-size: 50px;
+    font-weight: 800;
+    
+}
+.main-banner-title1{
+    margin-top: 20px;
+}
+
+.main-banner-title1, .main-banner-title2{
+    padding: 10px 5px;
+    max-width: fit-content;
+    margin-left: 20px;
+}

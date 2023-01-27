@@ -1,0 +1,74 @@
+
+body {
+	margin: 0;
+	font-family: "Nunito", "Arial", "Helvetica", sans-serif;
+	--main-color: #acb128;
+}
+.row-direction{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
+.column-direction{
+	display: flex;
+	flex-direction: column;
+}
+.my_btn{
+	background-color: var(--main-color);
+	padding: 4px 14px;
+	border: none;
+	border-radius: 20px;
+}
+/* css for Recipes.jsx */
+.second-meal {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	color: var(--main-color);
+	font-size: 18px;
+	font-weight: 700;
+	position: relative;
+	top: -50px;
+	opacity: 0;
+	height: 0px;
+
+}
+.active{
+	transition: 0.5s top linear, 1s transform linear,;
+	top: 0px;
+	transform: translateY(88px);
+	opacity: 1;
+}
+.active1{
+	transition:  0.5s top linear, 1s transform linear,;
+	top: 0px;
+	transform: translateY(75px);
+	opacity: 1;
+}
+
+.meat,
+.fish,
+.vegetable,
+.cake,
+.pancakes,
+.bread{
+	padding: 4px 10px;
+	box-shadow: 0 0 5px 0 #acb128;
+	width: 187px;
+}
+.item-ingredient input[type="checkbox"] {
+	background: #ccc;
+	border: 1px solid #777;
+}
+
+.item-ingredient input[type="checkbox"]:checked{
+	background: var(--main-color);
+	border: 1px solid #abc128;
+	box-shadow: 0 0 5px 0 #abc128;
+}
+.col-position{
+	position: sticky;
+	top: 0;
+}

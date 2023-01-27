@@ -1,0 +1,13 @@
+.form-add-comment form{
+    color: var(--main-color);
+    font-size: 25px;
+    font-weight: 700;
+    gap: 20px;
+}
+.form-add-comment textarea {
+    border: 1px solid #abc128;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 #abc128;
+    outline: none;
+    padding: 5px 10px;
+}
