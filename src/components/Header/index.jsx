@@ -68,16 +68,16 @@ export default () => {
             <Logo/>
             <div className="menu">
                 <div className="menu-button" onClick={() => {
-                    navigateToMain("/")
+                    navigateToMain("/project_recipes/")
                 }}>Главная</div>
                 <div className="menu-button" onClick={() =>{
-                    navigateToRecipies("/recipes")
+                    navigateToRecipies("./recipes")
                 }}>Рецепты</div>
                 <div className="menu-button" onClick={() =>{
-                    navigateToRecommendation("/recommendation")
+                    navigateToRecommendation("./recommendation")
                 }}>Советы</div>
                 <div className="menu-button" onClick={() =>{
-                    navigateToRecommendation("/serving")
+                    navigateToRecommendation("./serving")
                 }}>Сервировка</div>
             </div>
             <div className="search-content">
@@ -100,7 +100,7 @@ export default () => {
         :
         <Navbar className="bg_color"  expand="lg">
         <Container fluid>
-            <Navbar.Brand href="/"><img src={logo2} style={stImg}/></Navbar.Brand>
+            <Navbar.Brand href="/project_recipes/"><img src={logo2} style={stImg}/></Navbar.Brand>
             <Navbar>{(token || userToken) && <div className="name-user" 
                 style={{color: "#000", fontSize: "11px"}}><PersonCheck style={{fontSize: "20px"}}/>{userName}
                 </div>}</Navbar>
@@ -111,7 +111,7 @@ export default () => {
                 style={{ maxHeight: '100px' }}
                 navbarScroll
             >
-                <Nav.Link href="/">Главная</Nav.Link>
+                <Nav.Link href="/project_recipes/">Главная</Nav.Link>
                 <Nav.Link href="/recipes">Рецепты</Nav.Link>
                 <Nav.Link href="/recommendation">Советы</Nav.Link>
                 <Nav.Link href="/serving">Сервировка</Nav.Link>
