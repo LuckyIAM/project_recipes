@@ -1,30 +1,23 @@
 import React, { useContext, useState, useEffect } from "react";
 import Context from "../Context";
-import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Figure, Table } from "react-bootstrap";
 import FollowUs from "../components/FollowUs";
 import RecentRecipes from "../components/RecentRecipes";
-import { ChatText, Fire } from "react-bootstrap-icons";
 import Comments from "../components/Comments";
 
 export default () => {
-    const { recipes, flagLike, setFlagLike, userId} = useContext(Context);
+    const { recipes, widthScreen} = useContext(Context);
     const [recommendation, setRecommendation] = useState([]);
     const [itemsRecommend, setItemsRecommend] = useState([]);
-    const navigateToEditRecipe = useNavigate();
-    const navigateToAddComment = useNavigate();
-    
+
 console.log("recipes", recipes);
     useEffect(() => {
-        console.log("+");
         if(recipes){
             let result = recipes.filter(rcp => rcp.tags[(rcp.tags).length - 2] === "Советы")
             console.log(result);
             setRecommendation(result)
         }
-        console.log("++");
     }, [recipes])
-    console.log("recommendation", recommendation);
 
 
     useEffect(() => {
@@ -33,12 +26,6 @@ console.log("recipes", recipes);
         }
     }, [recommendation])
 
-    console.log("itemsRecommend", itemsRecommend);
-
-    const readComment = () =>{
-        navigateToAddComment("/addcomment")
-    }
-
 
     const stContainerRecipe = {
         padding: "15px",
@@ -46,45 +33,10 @@ console.log("recipes", recipes);
         margin: "10px"
     }
 
-    const stCapIcon = {
-        width: "30px",
-        height: "30px"
-    }
-
-    const stText = {
-        fontWeight: 800,
-        fontSize: "20px"
-    }
-    const stButtonGrup = {
-        background: "var(--main-color)",
-        padding: "7px 14px",
-        border: "1px solid #444",
-    }
-    
-    const stTitleBox = {
-        with: "80%"
-    }
-    const stAuthorImg = {
-        width: "20px",
-        height: "20px",
-        borderRadius: "50%"
-    }
-    const stTitleInformation = {
-        fontSize: "15px",
-        fontWeight: 700
-    }
-
-    const stCaloriesBox = {
-        padding: "20px",
-        height: "150px"
-    }
     const stCookingSteps = {
-        paddingTop: "40px"
+        paddingTop: widthScreen >=3 ? "30px" : "1px"
     }
-    const stCookingIcon = {
-        height: "40px",
-        paddingRight: "10px"
-    }
+   
     const stTitleSteps ={
         fontSize: "25px",
         fontWeight: 800,
@@ -96,7 +48,7 @@ console.log("recipes", recipes);
         paddingRight: "6px"
     }
     const stNumberStep ={
-        fontSize: "120px",
+        fontSize: widthScreen >=3 ? "120px" : "70px",
         fontWeight: "500"
     }
     const stTitleStep ={
@@ -116,9 +68,8 @@ console.log("recipes", recipes);
     const stCol1 ={
         boxShadow: "0 0 10px 0 #777",
         borderRadius: "20px",
-        margin: "20px 0px 20px 10px",
-        width: "calc(66% - 20px)"
-        
+        margin: widthScreen >=3 ? "20px 0px 20px 10px" : "7px 0px",
+        width: widthScreen >=3 ? "calc(66% - 20px)" : "100%"        
     }
     
     const stCol ={
@@ -126,8 +77,8 @@ console.log("recipes", recipes);
         boxShadow: "0 0 10px 0 #777",
     }
     const stContainerCards2 ={
-        margin: "20px 0px 20px 10px",
-        width: "calc(35% - 20px)"
+        margin: widthScreen >=3 ? "20px 0px 20px 10px" : "10px 0px",
+        width: widthScreen >=3 ? "calc(35% - 20px)" : "100%"
     }
     return <div className="recommendation">
         {recommendation && <div className="recommendation-box">
@@ -169,13 +120,11 @@ console.log("recipes", recipes);
                                 
                             </div>
                             
-                        </div>
-                    <Comments/>
-                    
+                        </div>                    
                     </div>
                 </Col>
                 <Col xs={12} md={4} style={stContainerCards2}>
-                    <Row className="col-position g-3">
+                    <Row className="col-position g-3 ">
                         <Col xs={12} md={12} style={stCol} >
                             <FollowUs/>
                         </Col>

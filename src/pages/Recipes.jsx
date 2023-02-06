@@ -1,7 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Context from "../Context";
-import Functions from "../Functions"
+import Functions from "../Functions";
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import appetizer from "../assets/appetizer_icon.png";
 import salad from "../assets/salad_icon.png";
 import soup from "../assets/soup_icon.png";
@@ -18,7 +21,7 @@ import FollowUs from "../components/FollowUs";
 
 export default () => {
     const {chapterDishesText, secondMealText, recipes, search, titleChapter, 
-        setTitleChapter, searchText, bakeryText} = useContext(Context);
+        setTitleChapter, searchText, bakeryText, widthScreen} = useContext(Context);
     let params = useParams
     const f = Functions(params.id);
     const chaptersName = ["appetizer", "salad", "soup", "fish-and-meat", "bakery", "dessert", "drinks", "souces", "canned"];
@@ -96,7 +99,7 @@ export default () => {
         e.stopPropagation();
         console.log(e.currentTarget.className);
         for(let i = 0; i < chapter.length; i++){
-            if(e.currentTarget.className === chapter[i]){
+            if(e.currentTarget.className.match(chapter[i])){
                 setTitleChapter(chapterText[i]);
                 setCurrentRecipes(currentArr)
             }
@@ -125,25 +128,29 @@ export default () => {
 
 
     console.log(flag);
+
     const stImgMenuChapter = {
-        width: "70px"
+        width: `${widthScreen >= 3 ? "70px" : "25px"}`
     }
     
     const stTextMenuChapter = {
-        color: "var(--main-color)",
-        fontSize: "25px",
-        fontWeight: 800
+        color: `${widthScreen >= 3 ? "var(--main-color)" : "#555"}`,
+        fontSize: `${widthScreen >= 3 ? "26px" : "19px"}`,
+        fontWeight: 800,
     }
+    
     
     const stMenuChapterItems = {
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
+        flexDirection: `${widthScreen >= 3 ? "column" : "row"}`,
+        justifyContent: `${widthScreen >= 3 ? "center" : "flex-start"}`,
         alignItems: "center",
-        padding: "4px 10px",
-        boxShadow: "0 0 10px 0 #acb128",
+        padding: `${widthScreen >= 3 ? "4px 10px" : "0px 15px"}`,
+        boxShadow: `${widthScreen >= 3 ? "0 0 10px 0 #acb128" : "none"}`,
+        border: `${widthScreen >= 3 ? "none" : "1px solid #aaa"}`,
         borderRadius: "5px",
-        height: "150px"  
+        height: `${widthScreen >= 3 ? "150px" : "30px"}`,
+        width: `${widthScreen >= 3 ? "auto" : "100%"}`,
     }
     
     const stMenuChapter = {
@@ -153,6 +160,14 @@ export default () => {
         justifyContent: "space-around",
         alignItems: "center",        
     }
+    const stMenuChapter2 = {
+        margin: "0px",
+        padding: " 15px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center", 
+        background: "#f8f9fa"       
+    }
     const stContainerCards ={
         borderRadius: "20px",
         boxShadow: "0 0 10px 0 #777",
@@ -160,31 +175,23 @@ export default () => {
     const stContainerCards1 ={
         borderRadius: "20px",
         boxShadow: "0 0 10px 0 #777",
-        margin: "20px 10px 20px 0",
-        width: "calc(66% - 20px)"
+        margin: `${widthScreen >= 3 ? "20px 10px 20px 0" : "7px 0px"}`,
+        width: `${widthScreen >= 3 ? "calc(66% - 20px)" : "100%"}`
     }
     const stContainerCards2 ={
-        margin: "20px 0px 20px 10px",
-        width: "calc(35% - 20px)"
+        margin: `${widthScreen >= 3 ? "20px 10px 20px 0" : "0px"}`,
+        width: `${widthScreen >= 3 ? "calc(35% - 20px)" : "100%"}`
     }
     const stCol ={
         borderRadius: "20px",
         boxShadow: "0 0 10px 0 #777",
-    }
-
-    const stCntainerTitleChapter = {
-        padding: "15px",
-        borderRadius: "20px",
-        boxShadow: "0 0 10px 0 #777",
-        boxSizing: "border-box", 
-        margin: "10px"
     }
    
 
     console.log("currentRecipes", currentRecipes);
     console.log(chapterDishesText);
     return <>
-    <div className="menu-chapter" style={stMenuChapter}>
+    <div className="menu-chapter" style={widthScreen >=3 ? stMenuChapter: stMenuChapter2}>
         <div className="appetizer" style={stMenuChapterItems} onClick={e => goToChapter(e, appetizers, chaptersName, chapterDishesText)}>
             <img src={appetizer} style={stImgMenuChapter} />
             <span style={stTextMenuChapter}>{chapterDishesText[0]}</span>
@@ -197,7 +204,7 @@ export default () => {
             <img src={soup} style={stImgMenuChapter}/>
             <span style={stTextMenuChapter}>{chapterDishesText[2]}</span>
         </div>
-        <div className="fish-and-meat" 
+        {widthScreen >=3 ?<div className="fish-and-meat" 
         style={stMenuChapterItems} 
         onClick={e => goToChapter(e, fishAndMeats, chaptersName, chapterDishesText)} 
         onMouseOver={showMinMenu} onMouseOut={closeMinMenu}
@@ -227,14 +234,37 @@ export default () => {
                 </div> 
             </div>
         </div>
-        <div className="bakery" style={stMenuChapterItems} 
+        :
+        <Navbar bg="light" style={stMenuChapterItems} expand="lg">
+            <Container style={{marginRight: "0px", marginLeft: "0px", paddingLeft: "0px", paddingRight: "0px"}}>
+                <NavDropdown title={<span style={stTextMenuChapter}><img src={fishAndMeat} style={stImgMenuChapter}/>{chapterDishesText[3]}</span>} id="basic-nav-dropdown">
+                    <NavDropdown.Item className="meat2" 
+                    onClick={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        goToChapter(e, meat, secondMealChapterName, secondMealText)}}>Мясное</NavDropdown.Item>
+                    <NavDropdown.Item className="fish2"
+                onClick={e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    goToChapter(e, fish, secondMealChapterName, secondMealText)}} >
+                        Рыбное
+                    </NavDropdown.Item>
+                    <NavDropdown.Item className="vegetable2" onClick={e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    goToChapter(e, vegetable, secondMealChapterName, secondMealText)}}>
+                        Овощное</NavDropdown.Item>
+                </NavDropdown>
+            </Container>
+        </Navbar>}
+        { widthScreen >= 3 ?<div className="bakery" style={stMenuChapterItems} 
             onClick={e => goToChapter(e, bakerys, chaptersName, chapterDishesText)} 
             onMouseOver={showMinMenuDessert} onMouseOut={closeMinMenuDessert}
             >
             <img src={bakery} style={stImgMenuChapter}/>
             <span style={stTextMenuChapter}>{chapterDishesText[4]}</span>
-            <div className={flag2 ? "second-meal active" : "second-meal"} 
-            >
+            <div className= {flag2 ? "second-meal active" : "second-meal"}>
                 <div className="cake" onClick={e => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -249,6 +279,26 @@ export default () => {
                     goToChapter(e, bread, bakerysChapterName, bakeryText)}}>Хлеб/булочки</div>
             </div>
         </div>
+        :
+        <Navbar bg="light" style={stMenuChapterItems} expand="lg">
+            <Container style={{marginRight: "0px", marginLeft: "0px", paddingLeft: "0px", paddingRight: "0px"}}>
+                <NavDropdown title={<span style={stTextMenuChapter}><img src={bakery} style={stImgMenuChapter}/>{chapterDishesText[4]}</span>} id="basic-nav-dropdown">
+                    <NavDropdown.Item className="cake2" onClick={e => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            goToChapter(e, cake, bakerysChapterName, bakeryText)}}>{bakeryText[0]}</NavDropdown.Item>
+                    <NavDropdown.Item className="pancakes2" onClick={e => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            goToChapter(e, pancakes, bakerysChapterName, bakeryText)}}>{bakeryText[1]}
+                    </NavDropdown.Item>
+                    <NavDropdown.Item className="bread2" onClick={e => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            goToChapter(e, bread, bakerysChapterName, bakeryText)}}>{bakeryText[2]}</NavDropdown.Item>
+                </NavDropdown>
+            </Container>
+        </Navbar>}
         <div className="dessert" style={stMenuChapterItems} onClick={e => goToChapter(e, desserts, chaptersName, chapterDishesText)}>
             <img src={dessert} style={stImgMenuChapter}/>
             <span style={stTextMenuChapter}>{chapterDishesText[5]}</span>

@@ -9,7 +9,7 @@ import ContainerCardPageRecipes from "../components/ContainerCardPageRecipes";
 import FollowUs from "../components/FollowUs"
 
 export default () => {
-    const {recentRecipe} = useContext(Context);
+    const {recentRecipe, widthScreen} = useContext(Context);
 
     const stAdvertising = {
         background: "#f9f9f9",
@@ -33,7 +33,7 @@ export default () => {
         paddingTop: "30px",
         paddingBottom: "30px",
         margin: "20px 10px 20px 0",
-        width: "calc(66% - 20px)"
+        width: widthScreen === 3 ? "calc(66% - 20px)": "100%"
     }
     const stCol33 ={
         boxShadow: "0 0 10px 0 #777",
@@ -42,8 +42,8 @@ export default () => {
         paddingBottom: "30px",
     }
     const stCol4 ={
-        margin: "20px 0px 20px 10px",
-        width: "calc(35% - 20px)"
+        margin: widthScreen === 3 ? "20px 0px 20px 10px" : "5px 0px",
+        width: widthScreen === 3 ? "calc(35% - 20px)":"100%"
     }
     const stCol44 ={
         boxShadow: "0 0 10px 0 #777",
@@ -67,8 +67,8 @@ export default () => {
         <Banner/>
         <div className="advertising" style={stAdvertising}><MainMiniCarousel/></div>
         <Container>
-            <Row className="g-4">
-                <Col xs={12} md={12} style={stCol}>
+            <Row>
+                <Col xs={12} md={12} style={stCol} >
                     <ContainCardMainAll/>
                 </Col>
                 <Col xs={12} md={12} style={stCol2}>
@@ -91,7 +91,6 @@ export default () => {
                         </Col>
                     </Row>
                 </Col>
-
             </Row>
         </Container>
     </div>

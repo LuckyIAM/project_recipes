@@ -1,14 +1,19 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from "../../Context";
+import { Container, Form, Button } from "react-bootstrap";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import {BoxArrowInRight, BoxArrowLeft, PersonCheck, Search} from "react-bootstrap-icons"
 import "./style.css";
 import addBlog from "./img/add_blog.png"
 import editBlog from "./img/edit_icon.png"
 import Logo from "../Logo";
+import logo2 from "../../assets/logo2.png"
 
 export default () => {
-    const {token, setToken, userToken, setUserToken, setShowModal, searchText, setSearchText, recipes, setSearch, userName} = useContext(Context);
+    const {token, userToken, setShowModal, searchText, setSearchText, recipes, setSearch, userName, widthScreen} = useContext(Context);
     const navigateToAddRecipe = useNavigate();
     const navigateToMain = useNavigate();
     const navigateToRecipies = useNavigate();
@@ -52,9 +57,14 @@ export default () => {
             setSearch(recipeFinde);
         }
     }
+    const stImg = {
+        width: "80px",
+        height: "80px"
+    }
+    
     console.log(userName);
     return <header>
-        <div className="container-header">
+        {widthScreen >= 3 ?<div className="container-header">
             <Logo/>
             <div className="menu">
                 <div className="menu-button" onClick={() => {
@@ -87,5 +97,44 @@ export default () => {
                 
             </div>
         </div>
+        :
+        <Navbar className="bg_color"  expand="lg">
+        <Container fluid>
+            <Navbar.Brand href="/"><img src={logo2} style={stImg}/></Navbar.Brand>
+            <Navbar>{(token || userToken) && <div className="name-user" 
+                style={{color: "#000", fontSize: "11px"}}><PersonCheck style={{fontSize: "20px"}}/>{userName}
+                </div>}</Navbar>
+            <Navbar.Toggle aria-controls="navbarScroll" />
+            <Navbar.Collapse id="navbarScroll">
+            <Nav
+                className="dark_my my-2 my-lg-0"
+                style={{ maxHeight: '100px' }}
+                navbarScroll
+            >
+                <Nav.Link href="/">Главная</Nav.Link>
+                <Nav.Link href="/recipes">Рецепты</Nav.Link>
+                <Nav.Link href="/recommendation">Советы</Nav.Link>
+                <Nav.Link href="/serving">Сервировка</Nav.Link>
+                <Nav.Link>{((!token && userToken) && (token && !userToken) || (!token && !userToken)) && <div onClick={getModal}>Войти</div>}</Nav.Link>
+                <Nav.Link>{(token || userToken) && <div onClick={getOut}>Выйти</div>}</Nav.Link>
+                <Nav.Link>{token && <div onClick={editRecipe}>Редактировать</div>}</Nav.Link>
+                <Nav.Link>{token && <div onClick={addRecipe}>Добавить</div>}</Nav.Link>
+                
+            
+            </Nav>
+            <Form className="d-flex">
+            <Form.Control
+                // style={{borderColor: "#000", transition: "border-color .15s ease-in-out, box-shadow .15s ease-in-out;"}}
+                value={searchText} 
+                onChange={e => setSearchText(e.target.value)}
+                placeholder="Пойск"
+                className="dark_my"
+                aria-label="dark"
+            />
+            <Button variant="outline-success" onMouseDown={handler1} onMouseUp={handler2}>Найти</Button>
+            </Form>
+        </Navbar.Collapse>
+    </Container>
+</Navbar>}
     </header>
 }

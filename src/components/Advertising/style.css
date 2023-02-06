@@ -1,7 +1,8 @@
 .banner-container{
     width: 95%;
+    margin: 10px 0px;
 }
-.banner img{
+.banner img, .banner2 img{
     width: 230px;
     height: 230px;
     background-position: center;
@@ -18,6 +19,15 @@
     margin: 30px 10px;
     color: #555;
 }
+.banner2{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 250px;
+    margin: 30px 10px;
+    color: #555; 
+}
 
 .text-banner div{
     font-weight: 700;
@@ -29,5 +39,9 @@
     font-size: 45px;
 }
 @media(max-width: 520px){
-
+    .text-banner div{
+        font-weight: 700;
+        font-size: 25px;
+        font-weight: 600;
+    }
 }

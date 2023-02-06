@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
+import Context from "../../Context";
 import "./style.css";
 import bannerCooker from "../../assets/banner-cooker.jpg"
-import { Heart, HeartFill } from "react-bootstrap-icons";
+import { HeartFill } from "react-bootstrap-icons";
 
 export default () => {
+    const {widthScreen} = useContext(Context)
     const stIconHeart = {
         fontSize: "7px"
     }
+    const stBannerContainer = {
+        height: widthScreen === 3 ? "250px": "400px",
+        margin: "15px 0px"
+    }
     
-    return <div className="banner-container">
-        <div className="banner">
+    return <div className="banner-container" style={stBannerContainer}>
+        <div className={widthScreen ===3 ? "banner":"banner2"}>
             <img className="image-banner-container" src={bannerCooker}/>
             <div className="text-banner">
                 <div className="title-banner">Вкусная еда - </div>

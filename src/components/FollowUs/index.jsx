@@ -17,7 +17,7 @@ export default () => {
         marginLeft: "5px" 
     }
     return <div className="follow-us">
-        <div className="follow-us-title d-flex p-3" >
+        <div className={innerWidth >=500 ? "follow-us-title d-flex p-3" : "follow-us-title d-flex m-auto"} >
                         <span style={stPole}>&nbsp;&nbsp;</span><div style={stTitleRecentContain}>&nbsp;&nbsp;Подписывайтесь</div>
                     </div>
         <div className="follow-us-container">

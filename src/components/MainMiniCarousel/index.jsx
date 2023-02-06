@@ -4,14 +4,14 @@ import Context from "../../Context";
 import CardMain from "../CardMain";
 
 export default () => {
-    const {recipes, months} = useContext(Context);
+    const {recipes, months, widthScreen} = useContext(Context);
     const [go, setGo] = useState(0);
     const [clickCnt, setClickCnt] = useState(1);
-    const widthScrooling = window.innerWidth / 100 * 80;
+    const widthScrooling = widthScreen >= 3 ? 367 * widthScreen : 266 * widthScreen;
 
 
     const stboxCarousel = {
-        height: "350px",
+        height: `${widthScreen >= 3 ? "350px" : "250px"}`,
         display: "flex",
         width: `${(recipes.length + 1) * 387}px`,
         left: `${window.innerWidth / 100  + go}px`,
@@ -26,6 +26,9 @@ export default () => {
         border: "none",
         margin: "2px",
         cursor: "pointer"
+    }
+    const stContainCarousel = {
+        margin: `${widthScreen >= 3 ? "30px":"10px"}` 
     }
 
     const goLeft = e => {
@@ -46,8 +49,7 @@ export default () => {
     }
     const goRight = e => {
         e.stopPropagation();
-        console.log(((recipes.length + 1) * 367) / widthScrooling > clickCnt);
-        if(((recipes.length + 1) * 367) / widthScrooling > clickCnt){
+        if(Math.floor(recipes.length / widthScreen) >= clickCnt){
             setClickCnt(clickCnt + 1);
             setGo(go - widthScrooling);
         } else {
@@ -78,7 +80,7 @@ export default () => {
             />)}
         </div>
     </div>
-    <div className="scrol-main-carusel">
+    <div className="scrol-main-carusel" style={stContainCarousel}>
         <button className="btn-ball go-left" style={stBtnBall} onClick={goLeft}></button>
         <button className="btn-ball go-right" style={stBtnBall} onClick={goRight}></button>
     </div>

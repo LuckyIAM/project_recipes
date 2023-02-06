@@ -1,4 +1,8 @@
-
+.card-recipe-all-description{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 a {
     text-decoration: none;
     color: #000;
@@ -9,18 +13,19 @@ a:hover{
 .card-all-description-recipe{
     display: flex;
     gap: 20px;
-    width: 60vw;
-    height: 270px;
+    width: 1000;
+    height: 350px;
     padding: 20px;
 }
+
 .image-dishe{
-    width: calc(60% / 100 * 60);
+    width: 40%;
     height: 100%;
     /* background-color: aqua; */
     border-radius: 20px;
 }
 .short-discription{
-    width: calc(60% / 100 * 80);
+    width: 60%;
     height: 100%;
     border-radius: 20px;
     display: flex;
@@ -66,4 +71,31 @@ a:hover{
 .read-more{
     width: 170px;
     margin: 10px;
+}
+
+@media(max-width: 540px){
+    .card-all-description-recipe{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        width: 300;
+        height: auto;
+        padding: 10px;
+    }
+    .image-dishe{
+        width: 280px;
+        height: 250px;
+        /* background-color: aqua; */
+        border-radius: 20px;
+    }
+    .short-discription{
+        width: 280px;
+        height: 100%;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+    }
 }

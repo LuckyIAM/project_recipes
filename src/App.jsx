@@ -42,6 +42,19 @@ export default () => {
     const [flagActiv, setFlagActiv] = useState(false);
     const [userName, setUserName] = useState(localStorage.getItem("user-name") || "");
     const [serving, setServing] = useState([])
+    const [widthScreen, setWidthScreen] = useState();
+    useEffect(()=>{
+        if (innerWidth < 780){
+            setWidthScreen(1);
+        }else if (innerWidth >= 780 && innerWidth < 1100){
+            setWidthScreen(2);
+        }else if (innerWidth >= 1100 && innerWidth < 1400){
+            setWidthScreen(3);
+        }else if (innerWidth >= 1100){
+            setWidthScreen(4);
+        }
+    }, []) 
+
     useEffect(()=>{
         if(token){
             api.getBlogs()
@@ -164,7 +177,9 @@ export default () => {
         userName: userName, 
         setUserName: setUserName,
         serving: serving, 
-        setServing: setServing
+        setServing: setServing,
+        widthScreen: widthScreen, 
+        setWidthScreen: setWidthScreen
 
     }}>
         <Modal/>

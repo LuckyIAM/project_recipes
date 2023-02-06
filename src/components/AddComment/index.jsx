@@ -3,18 +3,32 @@ import Context from "../../Context";
 import "./style.css";
 
 export default () => {
-    const {idRecipe, api} = useContext(Context);
+    const {idRecipe, api, token, apiUser, userToken, widthScreen} = useContext(Context);
     const [addComment, setAddComment] = useState("");
 
     const sendComment = (e) => {
         e.preventDefault();
         console.log(idRecipe, "id");
+        const btnComment = document.querySelector(".add_comment")
+        console.log(addComment);
         if(idRecipe){
-            api.addComment(idRecipe, {"text": addComment})
-                .then(res => res.json())
-                .then(data => {
-                    console.log("comment", data);
-                })
+            if(token){
+                api.addComment(idRecipe, {"text": addComment})
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log("comment", data);   
+                    })
+            }else if(userToken){
+                apiUser.addComment(idRecipe, {"text": addComment})
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log("comment", data);
+                    })
+            }
+            setAddComment("")
+            setTimeout(() => btnComment.textContent="Вы оставили коментарии", 500)
+            setTimeout(() => btnComment.textContent="Добавить отзыв", 2000)
+            
         }
     }
     const stAddComentBox ={
@@ -32,13 +46,13 @@ export default () => {
                     <label htmlFor="comments">Оставьте коментарии</label>
                     <textarea  id="comments"
                     type="text" 
-                    rows="6" 
-                    cols="40" 
+                    rows={widthScreen >=3 ? "6" : "4"} 
+                    cols={widthScreen >=3 ? "40" : "20"}  
                     value={addComment}
                     onChange={(e) => setAddComment(e.target.value)}
                     >
                     </textarea>
-                    <button className="my_btn" type="submit" onClick={sendComment}>Добавить отзыв</button>
+                    <button className="my_btn add_comment" type="submit" onClick={sendComment}>Добавить отзыв</button>
                 </form>
             </div>
         </div>

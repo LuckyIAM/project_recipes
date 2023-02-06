@@ -14,11 +14,11 @@ import FollowUs from "../components/FollowUs";
 import RecentRecipes from "../components/RecentRecipes";
 
 export default () => {
-    const {serving, search, searchText} = useContext(Context);
+    const {serving, search, searchText, widthScreen} = useContext(Context);
     let params = useParams
     const f = Functions(params.id);
     const [currentRecipes, setCurrentRecipes] = useState([]);
-    const chapterServingText = ["Декор салфеток", "Сервировку сладкого меню","Декор напитков", "Настольные украшения", "Скатерть", "Таблички и меню"]
+    const chapterServingText = ["Декор салфеток", "Cладкое меню","Декор напитков", "Настольные украшения", "Скатерть", "Таблички и меню"]
     const decorText = ["napkin", "sweet", "drinks2", "pot", "cloth", "nameplate"]
     const [napkins, setNapkins] = useState([]);
     const [sweets, setSweets] = useState([]);
@@ -41,7 +41,7 @@ export default () => {
     useEffect(() => {
         if(napkins.length > 0 && search.length ===0 ){
             setCurrentRecipes(napkins);
-            setTitleDecor("Закуски")
+            setTitleDecor("Декор салфеток")
         }
     }, [napkins])
 
@@ -65,26 +65,26 @@ export default () => {
     }
 
     const stImgMenuChapter = {
-        width: "70px"
+        width: `${widthScreen >= 3 ? "70px" : "25px"}`
     }
     
     const stTextMenuChapter = {
-        color: "var(--main-color)",
-        fontSize: "25px",
+        color: `${widthScreen >= 3 ? "var(--main-color)" : "#555"}`,
+        fontSize: `${widthScreen >= 3 ? "26px" : "19px"}`,
         fontWeight: 800,
-        textAlign: "center"
     }
     
     const stMenuChapterItems = {
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
+        flexDirection: `${widthScreen >= 3 ? "column" : "row"}`,
+        justifyContent: `${widthScreen >= 3 ? "center" : "flex-start"}`,
         alignItems: "center",
-        padding: "4px 10px",
-        boxShadow: "0 0 10px 0 #acb128",
+        padding: `${widthScreen >= 3 ? "4px 10px" : "0px 15px"}`,
+        boxShadow: `${widthScreen >= 3 ? "0 0 10px 0 #acb128" : "none"}`,
+        border: `${widthScreen >= 3 ? "none" : "1px solid #aaa"}`,
         borderRadius: "5px",
-        height: "150px", 
-        width: "250px"
+        height: `${widthScreen >= 3 ? "150px" : "30px"}`,
+        width: `${widthScreen >= 3 ? "auto" : "100%"}`,
     }
     
     const stMenuChapter = {
@@ -94,6 +94,14 @@ export default () => {
         justifyContent: "space-around",
         alignItems: "center",        
     }
+    const stMenuChapter2 = {
+        margin: "0px",
+        padding: " 15px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center", 
+        background: "#f8f9fa"       
+    }
     const stContainerCards ={
         borderRadius: "20px",
         boxShadow: "0 0 10px 0 #777",
@@ -101,12 +109,12 @@ export default () => {
     const stContainerCards1 ={
         borderRadius: "20px",
         boxShadow: "0 0 10px 0 #777",
-        margin: "20px 10px 20px 0",
-        width: "calc(66% - 20px)"
+        margin: `${widthScreen >= 3 ? "20px 10px 20px 0" : "7px 0px"}`,
+        width: `${widthScreen >= 3 ? "calc(66% - 20px)" : "100%"}`
     }
     const stContainerCards2 ={
-        margin: "20px 0px 20px 10px",
-        width: "calc(35% - 20px)"
+        margin: `${widthScreen >= 3 ? "20px 10px 20px 0" : "0px"}`,
+        width: `${widthScreen >= 3 ? "calc(35% - 20px)" : "100%"}`
     }
     const stCol ={
         borderRadius: "20px",
@@ -124,7 +132,7 @@ export default () => {
 
     console.log("currentRecipes", currentRecipes, napkins, sweets);
     console.log(chapterServingText);
-    return <><div className="menu-chapter" style={stMenuChapter}>
+    return <><div className="menu-chapter" style={widthScreen >=3 ? stMenuChapter : stMenuChapter2}>
         <div className="napkin" style={stMenuChapterItems} 
         onClick={e => goToChapter(e, napkins, decorText, chapterServingText)}>
             <img src={napkin} style={stImgMenuChapter} />

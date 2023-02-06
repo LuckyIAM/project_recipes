@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import Context from "../../Context";
 import { Link } from "react-router-dom";
 import "./style.css";
 
 export default ({image, badge, date, name, description, _id}) => {
-
+    const {widthScreen} = useContext(Context)
     const stImg = {
         position: "relative",
-        width: "330px",
-        height: "330px",
+        width: widthScreen >= 3 ? "330px" : "230px",
+        height: widthScreen >= 3 ? "330px" : "230px",
         background: ` linear-gradient(rgba(119, 119, 119, 0) 20%, #555), url(${image}) no-repeat center/cover` ,
         borderRadius: "20px",
         fontWeight: 600

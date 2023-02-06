@@ -5,11 +5,11 @@ import { ArrowLeftCircle, ArrowRightCircle } from "react-bootstrap-icons";
 import "./style.css"
 
 export default () => {
-    const {recipes} = useContext(Context);
+    const {recipes, widthScreen} = useContext(Context);
     const [go, setGo] = useState(0);
     const [clickCnt, setClickCnt] = useState(1);
-    const widthScrooling = window.innerWidth / 100 * 80;
-
+    const widthScrooling = `${widthScreen >= 3 ? 351 * widthScreen : 298 * widthScreen}`;
+    
     const stPole = {
         marginTop: "10px",
         background: "var(--main-color)",
@@ -21,27 +21,28 @@ export default () => {
         fontWeight: 900
     }
     const stArrowScrol = {
-        width: `${330 * recipes.length}px`,
+        width: widthScreen >= 3 ?`${351 * recipes.length}px` : `${298 * recipes.length}px`,
         left: `${go}px`,
         transition: "0.5s transform linear, 0.5s left linear",
         transform: `translateX(${go}px)`,
     }
     const goLeft = e => {
         e.stopPropagation();
+        console.log(clickCnt, go);
         if(clickCnt !== 1){
             setClickCnt(clickCnt - 1);
-            setGo(go + widthScrooling);
+            setGo(go + Number(widthScrooling));
         }
     }
     const goRight = e => {
         e.stopPropagation();
-        console.log(((recipes.length + 1) * 330) / widthScrooling > clickCnt);
-        if(((recipes.length + 1) * 330) / widthScrooling > clickCnt){
+        if(Math.floor(recipes.length  / widthScreen) >= clickCnt){
             setClickCnt(clickCnt + 1);
             setGo(go - widthScrooling);
+            console.log(clickCnt, go);
         }
     }
-    console.log(recipes);
+    
     return <div className="container-cards-all">
         <div className="arrow-scrol d-flex justify-content-between align-items-center fs-3" >
         <div className="title-recipes" style={stTitleRecipe}><span style={stPole}>&nbsp;&nbsp;</span>&nbsp;Рецепты</div>
@@ -50,7 +51,7 @@ export default () => {
             &nbsp;<span onClick={goRight}><ArrowRightCircle/></span>
         </div>
     </div>
-        <div className="container-cards-all-box d-flex justify-content-start align-items-center" style={stArrowScrol}>
+        <div className="container-cards-all-box d-flex justify-content-start align-items-start" style={stArrowScrol}>
             {recipes && recipes.map((card, i) => <CardMainAll
             key={i}
             img={card.image}

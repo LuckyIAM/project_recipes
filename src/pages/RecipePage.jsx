@@ -14,7 +14,8 @@ import RecentRecipes from "../components/RecentRecipes";
 import FollowUs from "../components/FollowUs";
 
 export default () => {
-    const {api, apiDefault, token, userToken, apiUser, setIdRecipe, flagLike, setFlagLike, userId, favourite, dataRecipe, setDataRecipe} = useContext(Context);
+    const {api, apiDefault, token, userToken, apiUser, setIdRecipe, 
+        flagLike, setFlagLike, userId, favourite, dataRecipe, setDataRecipe, widthScreen} = useContext(Context);
     let params = useParams();
     const func = Functions(params.id);
     const [description, setDescription] = useState();
@@ -161,7 +162,7 @@ export default () => {
     }
     const stButtonGrup = {
         background: "var(--main-color)",
-        padding: "7px 14px",
+        padding: widthScreen >=3 ? "7px 14px": "2px 5px",
         border: "1px solid #444",
     }
     
@@ -182,9 +183,7 @@ export default () => {
         padding: "20px",
         height: "150px"
     }
-    const stCookingSteps = {
-        paddingTop: "40px"
-    }
+
     const stCookingIcon = {
         height: "40px",
         paddingRight: "10px"
@@ -200,11 +199,11 @@ export default () => {
         paddingRight: "6px"
     }
     const stNumberStep ={
-        fontSize: "120px",
-        fontWeight: "500"
+        fontSize: widthScreen >=3 ? "120px" : "60px",
+        fontWeight: "500",
     }
     const stDescriptionStep = {
-        width: "50%",
+        width: widthScreen >=3 ? "350px": "300px",
         textAlign: "justify",
         padding: "10px 20px"
     }
@@ -224,34 +223,28 @@ export default () => {
     const stCol1 ={
         boxShadow: "0 0 10px 0 #777",
         borderRadius: "20px",
-        margin: "20px 0px 20px 10px",
-        width: "calc(66% - 20px)"
+        margin: widthScreen >=3 ? "20px 0px 20px 10px" : "0px",
+        width: widthScreen >=3 ? "calc(66% - 20px)" : "100%"
         
-    }
-    const stCol2 ={
-        boxShadow: "0 0 10px 0 #777",
-        borderRadius: "20px",
-        margin: "20px 0px 20px 10px",
-        width: "calc(35% - 20px)"
     }
     const stCol ={
         borderRadius: "20px",
         boxShadow: "0 0 10px 0 #777",
     }
     const stContainerCards2 ={
-        margin: "20px 0px 20px 10px",
-        width: "calc(35% - 20px)"
+        margin: widthScreen >=3 ? "20px 0px 20px 10px" : "0px",
+        width: widthScreen >=3 ? "calc(35% - 20px)" : "100%" 
     }
     return <>
-    <Container>
+    <Container className="m-1">
         <Row>
-            <Col xs={12} md={8} style={stCol1}>
+            <Col xs={12} md={8} style={stCol1} className="d-flex justify-content-center align-items-center p-1">
                 <div className="container-recipe" style={stContainerRecipe}>
-                    <h1 className="title font-weight-bold mt-4 mb-4 ">
+                    <h1 className="title font-weight-bold m-1">
                         {dataRecipe.title}
                     </h1>
-                   {token && <div className="fw-bolder text-muted" title="Чтобы изменить рецепт, кликни.">id Рецепта:&nbsp; &nbsp;<span onClick={getCopied}>{dataRecipe._id}</span></div>}
-                    <div className="mt-2 mb-3" style={stTitleInformation}>
+                   {token && <div className="fw-bolder text-muted p-2" title="Чтобы изменить рецепт, кликни.">id Рецепта:&nbsp; &nbsp;<span onClick={getCopied}>{dataRecipe._id}</span></div>}
+                    <div className="m-2" style={stTitleInformation}>
                             <div className="info-author-and-reiting d-flex justify-content-between">
                                 <div className="left-side">
                                     {(token || userToken) && dataRecipe.author && <img src ={dataRecipe.author.avatar} style={stAuthorImg}/>}
@@ -272,10 +265,10 @@ export default () => {
                             </div>
                     </div>
                     <div className="d-flex justify-content-center"><Figure.Image src={dataRecipe.image} style={{width: "100%"}}/></div>
-                    <div className="mt-6">{String(dataRecipe.text).split('=>')[0]}</div>
+                    <div className="m-2">{String(dataRecipe.text).split('=>')[0]}</div>
                     {dataRecipe.tags[dataRecipe.tags.length - 1] !== "0" ?<Row>
-                        <Col sx={8} md={8}>
-                        <div className="ingreadients pt-5">  
+                        <Col sx={12} md={8}>
+                        <div className="ingreadients p-2 m-1">  
                         <div className="ingredients-box">
                             <div className="title-box d-flex justify-content-between" style={stTitleBox}>
                                 <div className="row-direction">
@@ -309,7 +302,7 @@ export default () => {
                         </div>                                 
                     </div>
                         </Col>
-                        <Col xs={4} md={4} className="d-flex justify-content-center align-items-center">
+                        <Col xs={12} md={4} className="d-flex justify-content-center align-item-center">
                             <div className="calories-box bg-light" style={stCaloriesBox}>
                                 <span className="fw-bolder fs-5">На порцию:</span>
                                 {caloriesNumber &&
@@ -362,8 +355,8 @@ export default () => {
                         </Col>
                         
                     </Row>} 
-                    <div className="cooking-steps" style={stCookingSteps}>
-                        <div className="steps-cooking-container d-flex justify-content-start align-items-center">
+                    <div className="cooking-steps p-1">
+                        <div className="steps-cooking-container d-flex justify-content-start align-items-center ml-1">
                             {dataRecipe.tags[dataRecipe.tags.length - 1] !== "0" ? 
                             <img src={cooking} style={stCookingIcon}/>
                             :<img src={craft} style={stCookingIcon}/>}
@@ -373,22 +366,25 @@ export default () => {
                             : <span> </span>}
                         </div>
                         {stepsDescriptionRecipe && stepsDescriptionRecipe.map((step, i) =>
-                        <Table>
+                        <Table >
                             <tbody>
                                 <tr>
                                     <td>
-                                        <div className="step d-flex justify-content-between align-items-center">
-                                            <div className="number-step" style={stNumberStep}>
-                                                {i + 1 }
+                                        <div className={widthScreen >= 3 ? "d-flex align-items-center"
+                                        : "d-flex flex-column align-items-center"}>
+                                            <div className="step-and-description row-direction">
+                                                <div className="number-step" style={stNumberStep}>
+                                                    {i + 1 }
+                                                </div>
+                                                <div className="description-step" style={stDescriptionStep}>{step.split("=>")[0]}</div>
                                             </div>
-                                            <div className="description-step" style={stDescriptionStep}>{step.split("=>")[0]}</div>
                                             <div className="image-step"><img src={step.split("=>")[1]} style={stImageStep} /></div>
                                         </div>
                                     </td>
                                 </tr>
                             </tbody>
                         </Table>)}
-                        <div className="wise-advice">
+                        <div className="wise-advice m-2">
                             <div className="title-advice" style={stTitleSteps}>Заметки от повора</div>
                             <div className="advice" style={stColckIcon}>
                             "Выключите телевизор, не отвечайте на телефонные звонки, просто сидите и читайте." 
@@ -398,8 +394,8 @@ export default () => {
                         </div>
                         
                     </div>
-                   <Comments/>
-                   
+                    <div className="p-3"><Comments/></div>
+
                 </div>
             </Col>
             <Col xs={12} md={4} style={stContainerCards2}>

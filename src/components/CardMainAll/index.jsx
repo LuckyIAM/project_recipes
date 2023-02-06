@@ -7,10 +7,11 @@ import "./style.css";
 export default ({img, badge, author_iamge, author_name, create_date, 
     quantity_mesage, quantity_likes, name_recipe, description, _id}) => {
 
-    const {recipes} = useContext(Context);
+    const {widthScreen} = useContext(Context);
    
     const stCardAllImage = {
         background: `url(${img}) no-repeat center/cover`,
+        width: widthScreen >= 3 ? "300px" : "250px",
         borderRadius: "20px"
     }
     return <Link to={`/recipe/${_id}`}>

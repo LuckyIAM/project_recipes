@@ -40,6 +40,8 @@ const Context =  React.createContext({
     userName: "", 
     setUserName: () => {},
     serving: [], 
-    setServing: () => {}
+    setServing: () => {},
+    widthScreen: 3, 
+    setWidthScreen: () => {}
 })
 export default Context;
