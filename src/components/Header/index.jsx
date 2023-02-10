@@ -19,7 +19,7 @@ export default () => {
     const navigateToRecipies = useNavigate();
     const navigateToEditRecipe = useNavigate();
     const navigateToRecommendation = useNavigate();
-    const navigateToServing = useNavigate();
+    
     
 
     const getModal = () => {
@@ -36,7 +36,7 @@ export default () => {
             localStorage.removeItem("id-user");
             localStorage.removeItem("user-name");
         }
-        window.location.reload()
+        // window.location.reload()
     }
     const addRecipe = () => {
         navigateToAddRecipe("/addRecipe")

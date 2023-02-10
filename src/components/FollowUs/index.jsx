@@ -9,12 +9,10 @@ export default () => {
         background: "var(--main-color)",
         borderRadius: "5px",
         height: "30px",
-        marginLeft: "10px"
     }
     const stTitleRecentContain = {
         fontSize: "30px",
         fontWeight: 900,
-        marginLeft: "5px" 
     }
     return <div className="follow-us">
         <div className={innerWidth >=500 ? "follow-us-title d-flex p-3" : "follow-us-title d-flex m-auto"} >

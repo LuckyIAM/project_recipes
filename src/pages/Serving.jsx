@@ -91,7 +91,7 @@ export default () => {
         margin: "20px",
         padding: " 15px",
         display: "flex",
-        justifyContent: "space-around",
+        justifyContent: "center",
         alignItems: "center",        
     }
     const stMenuChapter2 = {

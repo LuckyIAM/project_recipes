@@ -60,44 +60,44 @@ export default () => {
             api.getBlogs()
                 .then(res => res.json())
                 .then(data => {
-                    setRecipes(
-                        data.filter(r => {
+                    let result = data.filter(r => {
                             if(new Date(r.created_at).getFullYear() >= 2023 && 
                             new Date(r.created_at).getDate() >= 11 && 
                             new Date(r.created_at).getMonth() >= 0 && r.author._id === "636a510659b98b038f779cfa"){
                                 return r
                             }
                         })
-                    )
+                    localStorage.setItem("all-data", JSON.stringify(result));
+                    setRecipes(JSON.parse(localStorage.getItem("all-data")));
                 })
         }else if(userToken){
             apiUser.getBlogs()
                 .then(res => res.json())
                 .then(data => {
-                    setRecipes(
-                        data.filter(r => {
-                            if(new Date(r.created_at).getFullYear() >= 2023 && 
-                            new Date(r.created_at).getDate() >= 11 && 
-                            new Date(r.created_at).getMonth() >= 0 && r.author._id === "636a510659b98b038f779cfa"){
-                                return r
-                            }
-                        })
-                    )
-                })
+                    let result = data.filter(r => {
+                        if(new Date(r.created_at).getFullYear() >= 2023 && 
+                        new Date(r.created_at).getDate() >= 11 && 
+                        new Date(r.created_at).getMonth() >= 0 && r.author._id === "636a510659b98b038f779cfa"){
+                            return r
+                        }
+                    })
+                localStorage.setItem("all-data", JSON.stringify(result));
+                setRecipes(JSON.parse(localStorage.getItem("all-data")));
+            })
         }else{
             apiDefault.getBlogs()
                 .then(res => res.json())
                 .then(data => {
-                    setRecipes(
-                        data.filter(r => {
-                            if(new Date(r.created_at).getFullYear() >= 2023 && 
-                            new Date(r.created_at).getDate() >= 11 && 
-                            new Date(r.created_at).getMonth() >= 0 && r.author._id === "636a510659b98b038f779cfa"){
-                                return r
-                            }
-                        })
-                    )
-                })
+                    let result = data.filter(r => {
+                        if(new Date(r.created_at).getFullYear() >= 2023 && 
+                        new Date(r.created_at).getDate() >= 11 && 
+                        new Date(r.created_at).getMonth() >= 0 && r.author._id === "636a510659b98b038f779cfa"){
+                            return r
+                        }
+                    })
+                localStorage.setItem("all-data", JSON.stringify(result));
+                setRecipes(JSON.parse(localStorage.getItem("all-data")));
+            })
         }
         
     },[token, defaultToken]) 

@@ -145,12 +145,7 @@ export default () => {
 
     // console.log(unitsOfMeasurement, quantityIngredient, measurement, calories, caloriesNumber, dataRecipeTags, stepsDescriptionRecipe);
     console.log(dataRecipe, favourite, flagLike);
-    const stContainerRecipe = {
-        padding: "15px",
-        borderRadius: "20px",
-        margin: "10px"
-    }
-
+    
     const stCapIcon = {
         width: "30px",
         height: "30px"
@@ -162,7 +157,7 @@ export default () => {
     }
     const stButtonGrup = {
         background: "var(--main-color)",
-        padding: widthScreen >=3 ? "7px 14px": "2px 5px",
+        padding: widthScreen >=2 ? "7px 14px": "2px 5px",
         border: "1px solid #444",
     }
     
@@ -190,8 +185,7 @@ export default () => {
     }
     const stTitleSteps ={
         fontSize: "25px",
-        fontWeight: 800,
-        paddingRight: "20px"
+        fontWeight: 800
     }
     const stColckIcon = {
         color: "var(--main-color)",
@@ -203,9 +197,9 @@ export default () => {
         fontWeight: "500",
     }
     const stDescriptionStep = {
-        width: widthScreen >=3 ? "350px": "300px",
+        minWidth: widthScreen >=3 ? "320px": "240px",
         textAlign: "justify",
-        padding: "10px 20px"
+        padding: "2px"
     }
     const stImageStep = {
         height: "200px",
@@ -224,8 +218,7 @@ export default () => {
         boxShadow: "0 0 10px 0 #777",
         borderRadius: "20px",
         margin: widthScreen >=3 ? "20px 0px 20px 10px" : "0px",
-        width: widthScreen >=3 ? "calc(66% - 20px)" : "100%"
-        
+        width: widthScreen >=3 ? "calc(66% - 20px)" : "100%",
     }
     const stCol ={
         borderRadius: "20px",
@@ -236,14 +229,17 @@ export default () => {
         width: widthScreen >=3 ? "calc(35% - 20px)" : "100%" 
     }
     return <>
-    <Container className="m-1">
+    <div className="d-flex justify-content-center align-items-center">
+    <Container>
         <Row>
-            <Col xs={12} md={8} style={stCol1} className="d-flex justify-content-center align-items-center p-1">
-                <div className="container-recipe" style={stContainerRecipe}>
-                    <h1 className="title font-weight-bold m-1">
+            <Col xs={12} md={8} style={stCol1} >
+                <div className="container-recipe p-1" >
+                    <h1 className="title font-weight-bold">
                         {dataRecipe.title}
                     </h1>
-                   {token && <div className="fw-bolder text-muted p-2" title="Чтобы изменить рецепт, кликни.">id Рецепта:&nbsp; &nbsp;<span onClick={getCopied}>{dataRecipe._id}</span></div>}
+                   {token  && <div className="fw-bolder text-muted" title="Чтобы изменить рецепт, кликни.">
+                        id Рецепта:&nbsp; &nbsp;<span onClick={getCopied}>{dataRecipe._id}</span>
+                    </div>}
                     <div className="m-2" style={stTitleInformation}>
                             <div className="info-author-and-reiting d-flex justify-content-between">
                                 <div className="left-side">
@@ -264,11 +260,11 @@ export default () => {
                                 </div>}
                             </div>
                     </div>
-                    <div className="d-flex justify-content-center"><Figure.Image src={dataRecipe.image} style={{width: "100%"}}/></div>
-                    <div className="m-2">{String(dataRecipe.text).split('=>')[0]}</div>
+                    <div className="d-flex justify-content-center"><Figure.Image src={dataRecipe.image} style={{width: "95%"}}/></div>
+                    {String(dataRecipe.text).split('=>')[0]}
                     {dataRecipe.tags[dataRecipe.tags.length - 1] !== "0" ?<Row>
                         <Col sx={12} md={8}>
-                        <div className="ingreadients p-2 m-1">  
+                        <div className="ingreadients">  
                         <div className="ingredients-box">
                             <div className="title-box d-flex justify-content-between" style={stTitleBox}>
                                 <div className="row-direction">
@@ -332,10 +328,10 @@ export default () => {
                     :
                     <Row>
                         <Col sx={12} md={12}>
-                        <div className="ingreadients pt-5">  
+                        <div className="ingreadients">  
                             <div className="ingredients-box">
                                 <div className="title-box">
-                                    <div className="d-flex py-4">
+                                    <div className="d-flex">
                                         <img src={paperCraft} style={stCapIcon}/>
                                         <span style={stText}>&nbsp; &nbsp;Что вам нужно</span> 
                                     </div>
@@ -355,8 +351,8 @@ export default () => {
                         </Col>
                         
                     </Row>} 
-                    <div className="cooking-steps p-1">
-                        <div className="steps-cooking-container d-flex justify-content-start align-items-center ml-1">
+                    <div className="cooking-steps">
+                        <div className="steps-cooking-container d-flex justify-content-center align-items-center p-1">
                             {dataRecipe.tags[dataRecipe.tags.length - 1] !== "0" ? 
                             <img src={cooking} style={stCookingIcon}/>
                             :<img src={craft} style={stCookingIcon}/>}
@@ -366,24 +362,26 @@ export default () => {
                             : <span> </span>}
                         </div>
                         {stepsDescriptionRecipe && stepsDescriptionRecipe.map((step, i) =>
-                        <Table >
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div className={widthScreen >= 3 ? "d-flex align-items-center"
-                                        : "d-flex flex-column align-items-center"}>
-                                            <div className="step-and-description row-direction">
-                                                <div className="number-step" style={stNumberStep}>
-                                                    {i + 1 }
+                            <div className="d-flex justify-content-center">
+                            <Table >
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div className={widthScreen >= 2 ? "d-flex justify-content-between align-items-center"
+                                            : "d-flex flex-column justify-content-center align-items-center"}>
+                                                <div className="step-and-description d-flex align-items-center">
+                                                    <div className="number-step" style={stNumberStep}>
+                                                        {i + 1 }
+                                                    </div>
+                                                    <div className="description-step" style={stDescriptionStep}>{step.split("=>")[0]}</div>
                                                 </div>
-                                                <div className="description-step" style={stDescriptionStep}>{step.split("=>")[0]}</div>
+                                                <div className="image-step"><img src={step.split("=>")[1]} style={stImageStep} /></div>
                                             </div>
-                                            <div className="image-step"><img src={step.split("=>")[1]} style={stImageStep} /></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </Table>)}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                            </div>)}
                         <div className="wise-advice m-2">
                             <div className="title-advice" style={stTitleSteps}>Заметки от повора</div>
                             <div className="advice" style={stColckIcon}>
@@ -410,6 +408,7 @@ export default () => {
             </Col>
         </Row>
     </Container>
+    </div>
     </>
 }
 // 63be992259b98b038f77a557
