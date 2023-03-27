@@ -68,7 +68,7 @@ export default () => {
             <Logo/>
             <div className="menu">
                 <div className="menu-button" onClick={() => {
-                    navigateToMain("/")
+                    navigateToMain("/project_recipes/")
                 }}>Главная</div>
                 <div className="menu-button" onClick={() =>{
                     navigateToRecipies("./recipes")
@@ -111,10 +111,10 @@ export default () => {
                 style={{ maxHeight: '100px' }}
                 navbarScroll
             >
-                <Nav.Link href="/">Главная</Nav.Link>
-                <Nav.Link href="/recipes">Рецепты</Nav.Link>
-                <Nav.Link href="/recommendation">Советы</Nav.Link>
-                <Nav.Link href="/serving">Сервировка</Nav.Link>
+                <Nav.Link href="/project_recipes/">Главная</Nav.Link>
+                <Nav.Link href="./recipes">Рецепты</Nav.Link>
+                <Nav.Link href="./recommendation">Советы</Nav.Link>
+                <Nav.Link href="./serving">Сервировка</Nav.Link>
                 <Nav.Link>{((!token && userToken) && (token && !userToken) || (!token && !userToken)) && <div onClick={getModal}>Войти</div>}</Nav.Link>
                 <Nav.Link>{(token || userToken) && <div onClick={getOut}>Выйти</div>}</Nav.Link>
                 <Nav.Link>{token && <div onClick={editRecipe}>Редактировать</div>}</Nav.Link>

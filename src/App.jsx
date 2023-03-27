@@ -185,14 +185,14 @@ export default () => {
         <Modal/>
         <Header/>
         <Routes>
-            <Route path="/" element={<Main/>}/>
-            <Route path="/addRecipe" element={<AddRecipe/>}/>
-            <Route path="/editRecipe" element={<EditRecipe/>}/>
-            <Route path="/recipes" element={<Recipes/>}/>
-            <Route path="/recipe/:id" element={<RecipePage/>}/>
-            <Route path="/recommendation" element={<Recommendations/>}/>
-            <Route path="/addcomment" element={<AddComment/>}/>
-            <Route path="/serving" element={<Serving/>}/>
+            <Route path="/project_recipes/" element={<Main/>}/>
+            <Route path="./addRecipe" element={<AddRecipe/>}/>
+            <Route path="./editRecipe" element={<EditRecipe/>}/>
+            <Route path="./recipes" element={<Recipes/>}/>
+            <Route path="./recipe/:id" element={<RecipePage/>}/>
+            <Route path="./recommendation" element={<Recommendations/>}/>
+            <Route path="./addcomment" element={<AddComment/>}/>
+            <Route path="./serving" element={<Serving/>}/>
         </Routes>
         <Footer/>
     </Context.Provider>
