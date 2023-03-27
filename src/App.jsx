@@ -24,12 +24,12 @@ export default () => {
     const [apiDefault, setApiDefault] =useState(new Api(defaultToken))
     const [api, setApi] = useState(new Api(token))
     const [showModal, setShowModal] = useState(false);
-    const [recipes, setRecipes] = useState([]);
+    const [recipes, setRecipes] = useState(JSON.parse(localStorage.getItem("all-data")) ||[]);
     const chapterDishesText = ["Закуски", "Салаты", "Супы", "Вторые блюда", "Выпечка", "Десерты", "Напитки", "Соусы", "Заготовки"];
     const secondMealText = ["Мясные вторые блюда", "Рыбные вторые блюда", "Овощные вторые блюда"]; 
     const bakeryText =["Торты/кексы/печенье", "Блины/оладье", "Хлеб/булочки"];
     const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"]
-    const [dataRecipe, setDataRecipe] = useState(JSON.parse(localStorage.getItem("recipe")) || []);
+    const [dataRecipe, setDataRecipe] = useState(JSON.parse(localStorage.getItem("recipe")) ? JSON.parse(localStorage.getItem("recipe")) : []);
     const [idRecipe, setIdRecipe] = useState(localStorage.getItem("id-recipe") || "");
     const [userId, setUserId] = useState(localStorage.getItem("id-admin") || "");
     const [favourite, setFavourite] = useState([]);
@@ -100,7 +100,7 @@ export default () => {
             })
         }
         
-    },[token, defaultToken]) 
+    },[token, defaultToken, userToken]) 
     useEffect(() => {
         if(recipes){
             let result = recipes.filter(el => 
@@ -111,11 +111,10 @@ export default () => {
                 el.tags[el.tags.length - 2] !== "Сервировка/Вазы" &&
                 el.tags[el.tags.length - 2] !== "Сервировка/Скатерти" &&
                 el.tags[el.tags.length - 2] !== "Сервировка/Именные таблички и меню" )
-            console.log("result", result);
+            // console.log("result", result);
             if(result.length - 4 <=0 ){
                 setRecentRecipe([...result])
             }else if(result.length - 4 > 0){
-                console.log(result, "recipes2") 
                 setRecentRecipe(() => {
                     return [...result.slice((result.length - 4), (result.length))]
                 })
@@ -134,7 +133,7 @@ export default () => {
         }
     },[recipes])
 
-    console.log(recipes, "app");
+    // console.log(recipes, "app");
 
     return <Context.Provider value={{
         showModal: showModal,
@@ -142,6 +141,7 @@ export default () => {
         api: api,
         token: token,
         setToken: setToken,
+        defaultToken: defaultToken,
         chapterDishesText: chapterDishesText,
         recipes: recipes,
         setRecipes: setRecipes,
@@ -185,7 +185,7 @@ export default () => {
         <Modal/>
         <Header/>
         <Routes>
-            <Route path="/project_recipes/" element={<Main/>}/>
+            <Route path="/" element={<Main/>}/>
             <Route path="/addRecipe" element={<AddRecipe/>}/>
             <Route path="/editRecipe" element={<EditRecipe/>}/>
             <Route path="/recipes" element={<Recipes/>}/>

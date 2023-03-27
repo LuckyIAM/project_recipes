@@ -37,7 +37,7 @@ export default () =>{
         <div className="column-direction" style={stButtons}>
             <button className="btn" style={stButton} onClick={e => {
                 e.preventDefault();
-                navivateToMain("/project_recipes/");
+                navivateToMain("/");
             }}>Главная</button>
             <button className="btn" style={stButton} onClick={e => {
                 e.preventDefault();

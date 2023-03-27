@@ -3,6 +3,7 @@ import React from "react";
 const Context =  React.createContext({
     token: "",
     setToken: () => {},
+    defaultToken: "",
     api:"",
     showModal: false,
     setShowModal: () => {},

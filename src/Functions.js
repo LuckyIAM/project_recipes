@@ -8,11 +8,9 @@ export default (id) => {
     const setLike = () => {
         if(flagLike){
             if(token){
-                console.log("delete");
                 api.deleteLike(id)
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
                         setFavourite(prev => {
                             if(favourite.length > 0){
                                 setFlagLike(false);
@@ -24,7 +22,6 @@ export default (id) => {
                         })
                     })
             }else if(userToken){
-                console.log("delete");
                 apiUser.deleteLike(id)
                     .then(res => res.json())
                     .then(data => {
@@ -47,7 +44,6 @@ export default (id) => {
                 api.addLike(id)
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
                     setFavourite(prev => {
                         return [...prev,data]
                     })
@@ -57,7 +53,6 @@ export default (id) => {
                 apiUser.addLike(id)
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
                     setFavourite(prev => {
                         return [...prev,data]
                     })

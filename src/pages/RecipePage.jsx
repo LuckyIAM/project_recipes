@@ -14,11 +14,11 @@ import RecentRecipes from "../components/RecentRecipes";
 import FollowUs from "../components/FollowUs";
 
 export default () => {
-    const {api, apiDefault, token, userToken, apiUser, setIdRecipe, 
-        flagLike, setFlagLike, userId, favourite, dataRecipe, setDataRecipe, widthScreen} = useContext(Context);
+    const {api, apiDefault, token, userToken, setFlagLike, apiUser, setIdRecipe, 
+        flagLike, dataRecipe, setDataRecipe, widthScreen} = useContext(Context);
     let params = useParams();
     const func = Functions(params.id);
-    const [description, setDescription] = useState();
+    const [description, setDescription] = useState()
     const [ingredients, setIngredients] = useState([]);
     const [nameIngredient, setNameIngredient] = useState([]);
     const [unitsOfMeasurement, setUnitsOfMeasurement] = useState([]);
@@ -30,41 +30,41 @@ export default () => {
     const navigateToEditRecipe = useNavigate();
     const [dataRecipeTags, setDataRecipeTags] = useState("");
     const [stepsDescriptionRecipe, setStepsDescriptionRecipe] = useState([])
+    const [prmsId, setPrmsId] = useState( localStorage.getItem("id-recipe") || params.id)
     const navigateToAddComment = useNavigate();
 
     
+    useEffect(() => {
+        localStorage.setItem("id-recipe", params.id)
+        setPrmsId(localStorage.getItem("id-recipe"));
+    },[])
+
     
     useEffect(() => {
         if(token){
-            api.getRecipe(params.id)
+            api.getRecipe(prmsId)
                 .then(res => res.json())
                 .then(data => {
                     localStorage.setItem("recipe", JSON.stringify(data));
                     setDataRecipe(JSON.parse(localStorage.getItem("recipe")));
-                    localStorage.setItem("id-recipe", params.id);
-                    setIdRecipe(localStorage.getItem("id-recipe"));
                 })  
         }else if(userToken){
-            apiUser.getRecipe(params.id)
+            apiUser.getRecipe(prmsId)
                 .then(res => res.json())
                 .then(data => {
                     localStorage.setItem("recipe", JSON.stringify(data));
                     setDataRecipe(JSON.parse(localStorage.getItem("recipe")));
-                    localStorage.setItem("id-recipe", params.id);
-                    setIdRecipe(localStorage.getItem("id-recipe"));
                 })
         }else {
-            apiDefault.getRecipe(params.id)
+            apiDefault.getRecipe(prmsId)
                 .then(res => res.json())
                 .then(data => {
                     localStorage.setItem("recipe", JSON.stringify(data));
                     setDataRecipe(JSON.parse(localStorage.getItem("recipe")));
-                    localStorage.setItem("id-recipe", params.id);
-                    setIdRecipe(localStorage.getItem("id-recipe"));
                 })
         }
-    }, [])
-    console.log("dataRecipe", dataRecipe);
+    }, [prmsId])
+    
     useEffect(() => {
         if(dataRecipe){
             setIngredients([...String(String(dataRecipe.text).split('=>')[1]).split('\n')])            
@@ -140,11 +140,6 @@ export default () => {
     const readComment = () =>{
         navigateToAddComment("/addcomment")
     }
-
-
-
-    // console.log(unitsOfMeasurement, quantityIngredient, measurement, calories, caloriesNumber, dataRecipeTags, stepsDescriptionRecipe);
-    console.log(dataRecipe, favourite, flagLike);
     
     const stCapIcon = {
         width: "30px",
@@ -228,6 +223,8 @@ export default () => {
         margin: widthScreen >=3 ? "20px 0px 20px 10px" : "0px",
         width: widthScreen >=3 ? "calc(35% - 20px)" : "100%" 
     }
+
+
     return <>
     <div className="d-flex justify-content-center align-items-center">
     <Container>
@@ -283,7 +280,7 @@ export default () => {
                                 <div className="item-ingredient">
                                     <Row>
                                         <Col xs={6} md={7} className="d-flex custom-control custom-checkbox">
-                                        <label for="ingredient-name"><input id="ingredient-name" type="checkbox" className="form-check-input" />&nbsp; &nbsp;{name}</label>
+                                        <label htmlFor="ingredient-name"><input id="ingredient-name" type="checkbox" className="form-check-input" />&nbsp; &nbsp;{name}</label>
                                         </Col>
                                         <Col xs={3} md={2}>
                                         <span>{".".repeat(19)}</span>

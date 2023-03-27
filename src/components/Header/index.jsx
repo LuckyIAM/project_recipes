@@ -36,7 +36,7 @@ export default () => {
             localStorage.removeItem("id-user");
             localStorage.removeItem("user-name");
         }
-        // window.location.reload()
+        window.location.reload()
     }
     const addRecipe = () => {
         navigateToAddRecipe("/addRecipe")
@@ -68,7 +68,7 @@ export default () => {
             <Logo/>
             <div className="menu">
                 <div className="menu-button" onClick={() => {
-                    navigateToMain("/project_recipes/")
+                    navigateToMain("/")
                 }}>Главная</div>
                 <div className="menu-button" onClick={() =>{
                     navigateToRecipies("./recipes")
@@ -111,7 +111,7 @@ export default () => {
                 style={{ maxHeight: '100px' }}
                 navbarScroll
             >
-                <Nav.Link href="/project_recipes/">Главная</Nav.Link>
+                <Nav.Link href="/">Главная</Nav.Link>
                 <Nav.Link href="/recipes">Рецепты</Nav.Link>
                 <Nav.Link href="/recommendation">Советы</Nav.Link>
                 <Nav.Link href="/serving">Сервировка</Nav.Link>
