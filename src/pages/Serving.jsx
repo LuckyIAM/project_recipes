@@ -72,6 +72,7 @@ export default () => {
         color: `${widthScreen >= 3 ? "var(--main-color)" : "#555"}`,
         fontSize: `${widthScreen >= 3 ? "26px" : "19px"}`,
         fontWeight: 800,
+        textAlign: "center"
     }
     
     const stMenuChapterItems = {

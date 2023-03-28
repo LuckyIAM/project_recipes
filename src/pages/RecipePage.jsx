@@ -82,37 +82,37 @@ export default () => {
         }
     }, [ingredients])
 
+    
     useEffect(() => {
         if(unitsOfMeasurement){
-            setQuantityIngredient([...unitsOfMeasurement.map(el => {
+            setQuantityIngredient(unitsOfMeasurement.map(el => {
                 if(el.match(/[0-9]{1,3}/g)){
                     return parseFloat(el.match(/[0-9].{1,3}/g));
                 }else{
                     return "";
                 }
-            })])
-            setMeasurement([...unitsOfMeasurement.map(el => {
+            }))
+            setMeasurement(unitsOfMeasurement.map(el => {
                 if(el.match(/[а-я]{1,6}/g)){
                     return el.match(/[а-я]{1,6}/g).join(" ");
                 }else{
                     return "";
                 }
-            })])
+            }))
         }
     },[unitsOfMeasurement])
 
     useEffect(() => {
         if(calories){
-            setCaloriesNumber([...calories.match(/[0-9]{1,3}/g)])
+            setCaloriesNumber(calories.match(/[0-9]{1,3}/g))
         }
     }, [calories])
 
     useEffect(() => {
         if(dataRecipeTags){
-            setStepsDescriptionRecipe([...dataRecipeTags.slice(0,dataRecipeTags.length - 2)])
+            setStepsDescriptionRecipe(dataRecipeTags.slice(0,dataRecipeTags.length - 2))
         }
     }, [dataRecipeTags])
-   
 
     const getCopied = () => {
         if(dataRecipe){

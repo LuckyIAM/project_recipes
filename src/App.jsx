@@ -36,14 +36,14 @@ export default () => {
     const [flagLike, setFlagLike] = useState(false);
     const [searchText, setSearchText] = useState("");
     const [search, setSearch] = useState([]);
-    const [recentRecipe, setRecentRecipe] = useState([]);
+    const [recentRecipe, setRecentRecipe] = useState(localStorage.getItem("recent-recipe") ? JSON.parse(localStorage.getItem("recent-recipe")) : []);
     const [titleChapter, setTitleChapter] = useState("");
     const [dataStep, setDataStep] = useState("");
     const [flagActiv, setFlagActiv] = useState(false);
     const [userName, setUserName] = useState(localStorage.getItem("user-name") || "");
     const [serving, setServing] = useState([])
     const [widthScreen, setWidthScreen] = useState();
-
+    
     useEffect(()=>{
         if (innerWidth < 780){
             setWidthScreen(1);
@@ -113,10 +113,13 @@ export default () => {
                 el.tags[el.tags.length - 2] !== "Сервировка/Скатерти" &&
                 el.tags[el.tags.length - 2] !== "Сервировка/Именные таблички и меню" )
             if(result.length - 4 <=0 ){
-                setRecentRecipe([...result])
+                setRecentRecipe(result)
+                localStorage.setItem("recent-recipe", JSON.stringify(result))
             }else if(result.length - 4 > 0){
                 setRecentRecipe(() => {
+                    localStorage.setItem("recent-recipe", JSON.stringify(result.slice((result.length - 4), (result.length))))
                     return [...result.slice((result.length - 4), (result.length))]
+                    
                 })
             }
             let res = recipes.filter(el => {
