@@ -6,7 +6,6 @@ import "./style.css";
 export default () => {
     const {recentRecipe} = useContext(Context);
 
-    console.log(recentRecipe);
 
     const stPole = {
         marginTop:"20px",

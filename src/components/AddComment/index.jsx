@@ -8,22 +8,19 @@ export default () => {
 
     const sendComment = (e) => {
         e.preventDefault();
-        console.log(idRecipe, "id");
         const btnComment = document.querySelector(".add_comment")
-        console.log(addComment);
         if(idRecipe){
             if(token){
                 api.addComment(idRecipe, {"text": addComment})
                     .then(res => res.json())
                     .then(data => {
-                        console.log("comment", data);   
-                    })
+                })
             }else if(userToken){
                 apiUser.addComment(idRecipe, {"text": addComment})
                     .then(res => res.json())
                     .then(data => {
-                        console.log("comment", data);
-                    })
+
+                })
             }
             setAddComment("")
             setTimeout(() => btnComment.textContent="Вы оставили коментарии", 500)
@@ -47,7 +44,7 @@ export default () => {
                     <textarea  id="comments"
                     type="text" 
                     rows={widthScreen >=3 ? "6" : "4"} 
-                    cols={widthScreen >=3 ? "40" : "20"}  
+                    cols={widthScreen >=3 ? "40" : "19"}  
                     value={addComment}
                     onChange={(e) => setAddComment(e.target.value)}
                     >

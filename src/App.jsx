@@ -43,6 +43,7 @@ export default () => {
     const [userName, setUserName] = useState(localStorage.getItem("user-name") || "");
     const [serving, setServing] = useState([])
     const [widthScreen, setWidthScreen] = useState();
+
     useEffect(()=>{
         if (innerWidth < 780){
             setWidthScreen(1);
@@ -111,7 +112,6 @@ export default () => {
                 el.tags[el.tags.length - 2] !== "Сервировка/Вазы" &&
                 el.tags[el.tags.length - 2] !== "Сервировка/Скатерти" &&
                 el.tags[el.tags.length - 2] !== "Сервировка/Именные таблички и меню" )
-            // console.log("result", result);
             if(result.length - 4 <=0 ){
                 setRecentRecipe([...result])
             }else if(result.length - 4 > 0){
@@ -133,8 +133,7 @@ export default () => {
         }
     },[recipes])
 
-    // console.log(recipes, "app");
-
+   
     return <Context.Provider value={{
         showModal: showModal,
         setShowModal: setShowModal,
@@ -186,13 +185,13 @@ export default () => {
         <Header/>
         <Routes>
             <Route path="/project_recipes/" element={<Main/>}/>
-            <Route path="./addRecipe" element={<AddRecipe/>}/>
-            <Route path="./editRecipe" element={<EditRecipe/>}/>
-            <Route path="./recipes" element={<Recipes/>}/>
-            <Route path="./recipe/:id" element={<RecipePage/>}/>
-            <Route path="./recommendation" element={<Recommendations/>}/>
-            <Route path="./addcomment" element={<AddComment/>}/>
-            <Route path="./serving" element={<Serving/>}/>
+            <Route path="/addRecipe" element={<AddRecipe/>}/>
+            <Route path="/editRecipe" element={<EditRecipe/>}/>
+            <Route path="/recipes" element={<Recipes/>}/>
+            <Route path="/recipe/:id" element={<RecipePage/>}/>
+            <Route path="/recommendation" element={<Recommendations/>}/>
+            <Route path="/addcomment" element={<AddComment/>}/>
+            <Route path="/serving" element={<Serving/>}/>
         </Routes>
         <Footer/>
     </Context.Provider>

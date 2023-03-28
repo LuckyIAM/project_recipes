@@ -17,7 +17,6 @@ export default (id) => {
                                 return prev.filter(recipe => recipe._id !== id)   
                             }else{
                                 setFavourite()
-                                console.log("favorit is null");
                             }
                         })
                     })
@@ -25,21 +24,18 @@ export default (id) => {
                 apiUser.deleteLike(id)
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
                         setFavourite(prev => {
                             if(favourite.length > 0){
                                 setFlagLike(false);
                                 return prev.filter(recipe => recipe._id !== id)   
                             }else{
                                 setFavourite()
-                                console.log("favorit is null");
                             }
                         })
                     })
             }
             
         }else{
-            console.log("addlike");
             if(token){
                 api.addLike(id)
                 .then(res => res.json())

@@ -3,18 +3,16 @@ import Context from "../Context";
 import { Container, Row, Col, Figure, Table } from "react-bootstrap";
 import FollowUs from "../components/FollowUs";
 import RecentRecipes from "../components/RecentRecipes";
-import Comments from "../components/Comments";
+
 
 export default () => {
     const { recipes, widthScreen} = useContext(Context);
     const [recommendation, setRecommendation] = useState([]);
     const [itemsRecommend, setItemsRecommend] = useState([]);
 
-console.log("recipes", recipes);
     useEffect(() => {
         if(recipes){
             let result = recipes.filter(rcp => rcp.tags[(rcp.tags).length - 2] === "Советы")
-            console.log(result);
             setRecommendation(result)
         }
     }, [recipes])
@@ -80,6 +78,8 @@ console.log("recipes", recipes);
         margin: widthScreen >=3 ? "20px 0px 20px 10px" : "10px 0px",
         width: widthScreen >=3 ? "calc(35% - 20px)" : "100%"
     }
+
+
     return <div className="recommendation">
         {recommendation && <div className="recommendation-box">
         <Container className="p-4">

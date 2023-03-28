@@ -74,13 +74,6 @@ export default () => {
         }
     },[dataRecipe])
 
-    useEffect(() => {
-        if(token){
-            if(dataRecipe.likes.includes(userId)){
-                setFlagLike(true)
-            }
-        }
-    }, [dataRecipe])
 
     useEffect(() => {
         if(ingredients){
@@ -259,7 +252,7 @@ export default () => {
                     </div>
                     <div className="d-flex justify-content-center"><Figure.Image src={dataRecipe.image} style={{width: "95%"}}/></div>
                     {String(dataRecipe.text).split('=>')[0]}
-                    {dataRecipe.tags[dataRecipe.tags.length - 1] !== "0" ?<Row>
+                    {dataRecipeTags && dataRecipeTags[dataRecipeTags.length - 1] !== "0" ?<Row>
                         <Col sx={12} md={8}>
                         <div className="ingreadients">  
                         <div className="ingredients-box">
@@ -350,11 +343,11 @@ export default () => {
                     </Row>} 
                     <div className="cooking-steps">
                         <div className="steps-cooking-container d-flex justify-content-center align-items-center p-1">
-                            {dataRecipe.tags[dataRecipe.tags.length - 1] !== "0" ? 
+                            {dataRecipeTags && dataRecipeTags[dataRecipeTags.length - 1] !== "0" ? 
                             <img src={cooking} style={stCookingIcon}/>
                             :<img src={craft} style={stCookingIcon}/>}
                             <div className="title-steps" style={stTitleSteps}>Шаги приготовления</div>
-                            {dataRecipe.tags[dataRecipe.tags.length - 1] !== "0" ?
+                            {dataRecipeTags && dataRecipeTags[dataRecipeTags.length - 1] !== "0" ?
                             <span style={stColckIcon}><Clock/> {dataRecipeTags && dataRecipeTags[dataRecipeTags.length - 1]}</span>
                             : <span> </span>}
                         </div>
