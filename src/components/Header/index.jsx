@@ -71,13 +71,13 @@ export default () => {
                     navigateToMain("/project_recipes/")
                 }}>Главная</div>
                 <div className="menu-button" onClick={() =>{
-                    navigateToRecipies("./recipes")
+                    navigateToRecipies("/recipes")
                 }}>Рецепты</div>
                 <div className="menu-button" onClick={() =>{
-                    navigateToRecommendation("./recommendation")
+                    navigateToRecommendation("/recommendation")
                 }}>Советы</div>
                 <div className="menu-button" onClick={() =>{
-                    navigateToRecommendation("./serving")
+                    navigateToRecommendation("/serving")
                 }}>Сервировка</div>
             </div>
             <div className="search-content">
@@ -112,9 +112,9 @@ export default () => {
                 navbarScroll
             >
                 <Nav.Link href="/project_recipes/">Главная</Nav.Link>
-                <Nav.Link href="./recipes">Рецепты</Nav.Link>
-                <Nav.Link href="./recommendation">Советы</Nav.Link>
-                <Nav.Link href="./serving">Сервировка</Nav.Link>
+                <Nav.Link href="/recipes">Рецепты</Nav.Link>
+                <Nav.Link href="/recommendation">Советы</Nav.Link>
+                <Nav.Link href="/serving">Сервировка</Nav.Link>
                 <Nav.Link>{((!token && userToken) && (token && !userToken) || (!token && !userToken)) && <div onClick={getModal}>Войти</div>}</Nav.Link>
                 <Nav.Link>{(token || userToken) && <div onClick={getOut}>Выйти</div>}</Nav.Link>
                 <Nav.Link>{token && <div onClick={editRecipe}>Редактировать</div>}</Nav.Link>
