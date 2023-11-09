@@ -25,7 +25,7 @@ class Api {
     }
     //POST https://api.react-learning.ru/v2/:groupId/posts
     addBlog(body){
-        return fetch(`${this.path}/v2/group-7/posts`,{
+        return fetch(`${this.path}/v2/group-11/posts`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -36,7 +36,7 @@ class Api {
     }
     // GET https://api.react-learning.ru/v2/:groupId/posts
     getBlogs(){
-        return fetch(`${this.path}/v2/group-7/posts`,{
+        return fetch(`${this.path}/v2/group-11/posts`,{
             method: "GET",
             headers: {
                 authorization: `Bearer ${this.token}`,
@@ -46,7 +46,7 @@ class Api {
     }
     // GET https://api.react-learning.ru/v2/:groupId/posts/:id
     getRecipe(id_recipe){
-        return fetch(`${this.path}/v2/group-7/posts/${id_recipe}`, {
+        return fetch(`${this.path}/v2/group-11/posts/${id_recipe}`, {
             method: "GET",
             headers: {
                 authorization: `Bearer ${this.token}`,
@@ -56,7 +56,7 @@ class Api {
     }
     //PATCH https://api.react-learning.ru/v2/:groupId/posts/:postId
     editRecipe(id, body){
-        return fetch(`${this.path}/v2/group-7/posts/${id}`, {
+        return fetch(`${this.path}/v2/group-11/posts/${id}`, {
             method: "PATCH",
             headers: {
                 authorization: `Bearer ${this.token}`,
@@ -67,7 +67,7 @@ class Api {
     }
     //POST https://api.react-learning.ru/v2/:groupId/posts/comments/:postId
     addComment(idRecipe, body){
-        return fetch(`${this.path}/v2/group-7/posts/comments/${idRecipe}`, {
+        return fetch(`${this.path}/v2/group-11/posts/comments/${idRecipe}`, {
             method: "POST",
             headers: {
                 authorization: `Bearer ${this.token}`,
@@ -78,7 +78,7 @@ class Api {
     }
     // GET https://api.react-learning.ru/v2/:groupId/posts/comments/:postId
     getComment(idRec){
-        return fetch(`${this.path}/v2/group-7/posts/comments/${idRec}`, {
+        return fetch(`${this.path}/v2/group-11/posts/comments/${idRec}`, {
             method: "GET",
             headers: {
                 authorization: `Bearer ${this.token}`,
@@ -88,7 +88,7 @@ class Api {
     }
     //PUT https://api.react-learning.ru/v2/:groupId/posts/likes/:postId 
     addLike(id){
-        return fetch(`${this.path}/v2/group-7/posts/likes/${id}`, {
+        return fetch(`${this.path}/v2/group-11/posts/likes/${id}`, {
             method: "PUT",
             headers: {
                 authorization: `Bearer ${this.token}`,
@@ -98,7 +98,7 @@ class Api {
     }
     // DELETE https://api.react-learning.ru/v2/:groupId/posts/likes/:postId
     deleteLike(id_recipe){
-        return fetch(`${this.path}/v2/group-7/posts/likes/${id_recipe}`, {
+        return fetch(`${this.path}/v2/group-11/posts/likes/${id_recipe}`, {
             method: "DELETE",
             headers: {
                 authorization: `Bearer ${this.token}`,
