@@ -17,7 +17,7 @@ import Serving from "./pages/Serving"
 import Recommendations from "./pages/Recommendations";
 
 export default () => {
-    const [defaultToken, setDefaultToken] = useState("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzZhNTEwNjU5Yjk4YjAzOGY3NzljZmEiLCJncm91cCI6Imdyb3VwLTciLCJpYXQiOjE2Njc5MTE5NDYsImV4cCI6MTY5OTQ0Nzk0Nn0.2BSeorH_x9oD4V3WQJdhXakyPuYRkC2DhwHJqn2K0cw")
+    const [defaultToken, setDefaultToken] = useState("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTRmOTJkYmFmMjA3YTRlZGJmYmQzNDMiLCJncm91cCI6Imdyb3VwLTciLCJpYXQiOjE2OTk3MTM5ODAsImV4cCI6MTczMTI0OTk4MH0.nLhpIJLDCPhsu1SWR2YMEzLJl52ZScDqwSpKPuaBTzw")
     const [token, setToken] = useState(localStorage.getItem("token-admin") || "")
     const [userToken, setUserToken] = useState(localStorage.getItem("token-user") || "");
     const [apiUser, setapiUser] = useState( new Api(userToken))
